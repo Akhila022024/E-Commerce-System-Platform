@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LuxeLife Shop</title>
+<style>
+    * {margin:0;padding:0;box-sizing:border-box;}
+    body {font-family: Arial, sans-serif; background:#f4f4f4; color:#333;}
+    header {background:#5d4037;color:#fff;padding:15px;text-align:center;}
+    nav {display:flex;justify-content:center;gap:10px;margin-top:10px;}
+    nav button {padding:8px 14px;background:#8d6e63;color:#fff;border:none;border-radius:5px;cursor:pointer;}
+    nav button:hover {background:#6d4c41;}
+    .container {max-width:1200px;margin:auto;padding:20px;}
+    .grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+    .card {background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 4px 8px rgba(0,0,0,0.1);}
+    .card img {width:100%;height:200px;object-fit:cover;}
+    .card-content {padding:10px;}
+    .price {color:#5d4037;font-weight:bold;}
+    .btn {display:inline-block;background:#8d6e63;color:#fff;padding:6px 10px;border-radius:5px;text-decoration:none;margin-top:5px;}
+    .btn:hover {background:#6d4c41;}
+    .cart {margin-top:20px;padding:15px;background:#fff;border-radius:8px;box-shadow:0 4px 8px rgba(0,0,0,0.1);}
+    .cart h3 {margin-bottom:10px;}
+    .cart ul {list-style:none;margin-bottom:10px;}
+    .cart li {display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #ddd;}
+    .form-section {margin-top:15px;}
+    .form-section input, .form-section select {width:100%;padding:8px;margin:5px 0;border:1px solid #ccc;border-radius:5px;}
+    .modal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;}
+    .modal-content {background:#fff;padding:20px;border-radius:8px;max-width:400px;}
+    .close {float:right;cursor:pointer;font-weight:bold;}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>LuxeLife Shop</h1>
+    <nav>
+        <button onclick="showCategory('clothes')">Clothes</button>
+        <button onclick="showCategory('electronics')">Electronics</button>
+        <button onclick="showCategory('home')">Home & Kitchen</button>
+        <button onclick="showCategory('beauty')">Beauty & Personal Care</button>
+    </nav>
+</header>
+
+<div class="container">
+
+    <!-- CLOTHES -->
+    <section id="clothes" class="category">
+        <h2>Clothes</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF64gHuxs-xU1ROmM1ODxBB9JTd8kaSKT2-A&s" alt="Kids T-Shirt" class="product-img">
+                <div class="card-content">
+                    <h3>Kids T-Shirt</h3>
+                    <p class="price">$14.99</p>
+                    <a href="#" class="btn" onclick="addToCart('clothes','Kids T-Shirt','$14.99')">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        <div class="cart" id="cart-clothes">
+            <h3>Your Clothes Cart</h3>
+            <ul></ul>
+            <p>Total: ₹<span>0</span></p>
+            <div class="form-section">
+                <h4>User Details</h4>
+                <input type="text" id="name-clothes" placeholder="Name">
+                <input type="text" id="address-clothes" placeholder="Address">
+                <select id="payment-clothes">
+                    <option value="">Select Payment</option>
+                    <option>Credit Card</option>
+                    <option>UPI</option>
+                    <option>Cash on Delivery</option>
+                </select>
+                <button class="btn" onclick="placeOrder('clothes')">Place Order</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ELECTRONICS -->
+    <section id="electronics" class="category" style="display:none;">
+        <h2>Electronics</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://images-cdn.ubuy.co.in/6620d18656f9903d91488b9c-iniu-power-bank-20000mah-65w-usb-c.jpg" alt="Power Bank">
+                <div class="card-content">
+                    <h3>Power Bank</h3>
+                    <p class="price">₹1499</p>
+                    <a href="#" class="btn" onclick="addToCart('electronics','Power Bank',1499)">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        <div class="cart" id="cart-electronics">
+            <h3>Your Electronics Cart</h3>
+            <ul></ul>
+            <p>Total: ₹<span>0</span></p>
+            <div class="form-section">
+                <h4>User Details</h4>
+                <input type="text" id="name-electronics" placeholder="Name">
+                <input type="text" id="address-electronics" placeholder="Address">
+                <select id="payment-electronics">
+                    <option value="">Select Payment</option>
+                    <option>Credit Card</option>
+                    <option>UPI</option>
+                    <option>Cash on Delivery</option>
+                </select>
+                <button class="btn" onclick="placeOrder('electronics')">Place Order</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOME & KITCHEN -->
+    <section id="home" class="category" style="display:none;">
+        <h2>Home & Kitchen</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://indiannest.in/cdn/shop/files/hjk.jpg?v=1690754937&width=1445" alt="Sofa Set">
+                <div class="card-content">
+                    <h3>Sofa Set</h3>
+                    <p class="price">₹22,999</p>
+                    <a href="#" class="btn" onclick="addToCart('home','Sofa Set','₹22,999')">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        <div class="cart" id="cart-home">
+            <h3>Your Home & Kitchen Cart</h3>
+            <ul></ul>
+            <p>Total: ₹<span>0</span></p>
+            <div class="form-section">
+                <h4>User Details</h4>
+                <input type="text" id="name-home" placeholder="Name">
+                <input type="text" id="address-home" placeholder="Address">
+                <select id="payment-home">
+                    <option value="">Select Payment</option>
+                    <option>Credit Card</option>
+                    <option>UPI</option>
+                    <option>Cash on Delivery</option>
+                </select>
+                <button class="btn" onclick="placeOrder('home')">Place Order</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- BEAUTY -->
+    <section id="beauty" class="category" style="display:none;">
+        <h2>Beauty & Personal Care</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://bumtum.in/cdn/shop/files/2copy_600x.png?v=1750881361" alt="">
+                <div class="card-content">
+                    <h3>Baby Gentle Shampoo</h3>
+                    <p class="price">₹899</p>
+                    <a href="#" class="btn" onclick="addToCart('beauty','Baby Gentle Shampoo',899)">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        <div class="cart" id="cart-beauty">
+            <h3>Your Beauty & Personal Care Cart</h3>
+            <ul></ul>
+            <p>Total: ₹<span>0</span></p>
+            <div class="form-section">
+                <h4>User Details</h4>
+                <input type="text" id="name-beauty" placeholder="Name">
+                <input type="text" id="address-beauty" placeholder="Address">
+                <select id="payment-beauty">
+                    <option value="">Select Payment</option>
+                    <option>Credit Card</option>
+                    <option>UPI</option>
+                    <option>Cash on Delivery</option>
+                </select>
+                <button class="btn" onclick="placeOrder('beauty')">Place Order</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    let carts = {
+        clothes: [],
+        electronics: [],
+        home: [],
+        beauty: []
+    };
+
+    function showCategory(cat) {
+        document.querySelectorAll('.category').forEach(s => s.style.display = 'none');
+        document.getElementById(cat).style.display = 'block';
+    }
+
+    function addToCart(cat, name, price) {
+        carts[cat].push({name, price});
+        renderCart(cat);
+    }
+
+    function renderCart(cat) {
+        const cartEl = document.querySelector(`#cart-${cat} ul`);
+        cartEl.innerHTML = '';
+        let total = 0;
+        carts[cat].forEach((item, idx) => {
+            total += item.price;
+            const li = document.createElement('li');
+            li.innerHTML = `${item.name} - ₹${item.price} <a href="#" onclick="removeItem('${cat}',${idx})">x</a>`;
+            cartEl.appendChild(li);
+        });
+        document.querySelector(`#cart-${cat} span`).innerText = total;
+    }
+
+    function removeItem(cat, idx) {
+        carts[cat].splice(idx, 1);
+        renderCart(cat);
+    }
+
+    function placeOrder(cat) {
+        const name = document.getElementById(`name-${cat}`).value;
+        const address = document.getElementById(`address-${cat}`).value;
+        const payment = document.getElementById(`payment-${cat}`).value;
+        if(!name || !address || !payment) {
+            alert("Please fill all details");
+            return;
+        }
+        if(carts[cat].length === 0) {
+            alert("Cart is empty!");
+            return;
+        }
+        alert(`Order Confirmed!\n\nName: ${name}\nAddress: ${address}\nPayment: ${payment}\nItems: ${carts[cat].length}`);
+        carts[cat] = [];
+        renderCart(cat);
+    }
+</script>
+
+</body>
+</html>

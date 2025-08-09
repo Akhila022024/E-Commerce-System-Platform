@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Luxelife — Beauty & Personal Care (All Ages)</title>
+  <style>
+    :root{
+      --bg:#f7fafc; --card:#fff; --primary:#d63384; --accent:#0ea5a4; --muted:#6b7280;
+      --shadow: 0 8px 24px rgba(15,23,42,0.06);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:Inter,system-ui,Arial,sans-serif; background:var(--bg); color:#0f172a;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
+    header{
+      background:linear-gradient(90deg,#111827,#0b1220); color:#fff; padding:18px;
+      position:sticky; top:0; z-index:60;
+    }
+    .wrap{max-width:1200px;margin:0 auto;padding:0 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:8px;background:#fff;color:#0b1220;display:flex;align-items:center;justify-content:center;font-weight:800}
+    nav a{color:rgba(255,255,255,0.9);text-decoration:none;margin-left:12px;font-weight:600}
+    nav a:hover{text-decoration:underline}
+
+    main{max-width:1200px;margin:30px auto;padding:0 18px}
+    h1{font-size:1.6rem;margin-bottom:6px}
+    p.lead{color:var(--muted);margin-bottom:18px}
+
+    .section{margin-top:28px}
+    .section h2{font-size:1.1rem;margin-bottom:12px}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    .card{background:var(--card);border-radius:12px;padding:12px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+    .thumb{width:100%;height:180px;object-fit:cover;border-radius:8px;background:#f3f4f6}
+    .meta{padding:10px 0;display:flex;flex-direction:column;gap:8px;flex:1}
+    .title{font-weight:700;font-size:1rem}
+    .price{font-weight:800;color:var(--accent)}
+    .add{background:var(--primary);color:#fff;border:none;padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700}
+    .add:hover{filter:brightness(.95)}
+
+    /* cart button */
+    .cart-button{position:relative;cursor:pointer;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.04)}
+    .cart-count{position:absolute;top:-6px;right:-6px;background:#ef4444;color:#fff;border-radius:50%;font-size:12px;padding:3px 6px;font-weight:700}
+
+    /* popup cart */
+    #cart-popup{
+      position:fixed;right:18px;bottom:18px;width:360px;max-width:calc(100% - 36px);background:var(--card);box-shadow:0 20px 50px rgba(2,6,23,0.2);border-radius:12px;padding:12px;display:none;z-index:120;
+    }
+    #cart-popup h3{margin:6px 0 10px;font-size:1.05rem}
+    .cart-list{max-height:360px;overflow:auto;padding-right:6px}
+    .cart-row{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid #f1f5f9}
+    .cart-row img{width:60px;height:60px;object-fit:cover;border-radius:8px}
+    .cart-info{flex:1}
+    .cart-name{font-weight:700;font-size:.95rem}
+    .cart-price{color:var(--accent);font-weight:800;margin-top:6px}
+    .qty{display:flex;align-items:center;gap:6px;margin-top:8px}
+    .qty button{width:28px;height:28px;border-radius:6px;border:1px solid #e6e9ef;background:#fff;cursor:pointer}
+    .qty span{min-width:28px;text-align:center;display:inline-block}
+
+    .cart-foot{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+    .total-row{display:flex;justify-content:space-between;font-weight:800;font-size:1.05rem}
+    .checkout{background:var(--accent);color:#042022;padding:10px;border-radius:8px;border:none;font-weight:800;cursor:pointer}
+    .close-cart{background:#f3f4f6;border:none;padding:8px;border-radius:8px;cursor:pointer}
+
+    /* responsive */
+    @media (max-width:640px){
+      .thumb{height:140px}
+      #cart-popup{right:12px;left:12px;bottom:12px;width:auto}
+      .wrap{flex-direction:column;align-items:flex-start;gap:10px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="logo">G</div>
+        <div>
+          <div style="font-weight:800">GlowCare</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.8)">Beauty & Personal Care — All ages</div>
+        </div>
+      </div>
+
+      <nav aria-label="main navigation">
+        <a href="#kids">Kids</a>
+        <a href="#teens">Teens</a>
+        <a href="#adults">Adults</a>
+        <a href="#seniors">Seniors</a>
+        <button class="cart-button" onclick="toggleCart()" aria-haspopup="dialog" aria-controls="cart-popup" title="Open cart">
+          🛒 Cart <span id="cart-count" class="cart-count">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main style="max-width:1200px;margin:26px auto;padding:0 18px">
+    <h1>Beauty & Personal Care for Every Age</h1>
+    <p class="lead">Clean, gentle and effective products — curated categories for kids, teens, adults and seniors. Tap “Add to Cart” to try.</p>
+
+    <!-- KIDS -->
+    <section id="kids" class="section">
+      <h2>Kids (gentle & tear-free)</h2>
+      <div class="grid" id="kids-grid"></div>
+    </section>
+
+    <!-- TEENS -->
+    <section id="teens" class="section">
+      <h2>Teens (acne-care & gentle cleansers)</h2>
+      <div class="grid" id="teens-grid"></div>
+    </section>
+
+    <!-- ADULTS -->
+    <section id="adults" class="section">
+      <h2>Adults (skincare & styling)</h2>
+      <div class="grid" id="adults-grid"></div>
+    </section>
+
+    <!-- SENIORS -->
+    <section id="seniors" class="section">
+      <h2>Seniors (hydration & gentle care)</h2>
+      <div class="grid" id="seniors-grid"></div>
+    </section>
+  </main>
+
+  <!-- CART POPUP -->
+  <div id="cart-popup" role="dialog" aria-label="Shopping cart">
+    <h3>Your Cart</h3>
+    <div class="cart-list" id="cart-items"></div>
+
+    <div class="cart-foot">
+      <div class="total-row"><span>Total</span><span id="cart-total">₹0</span></div>
+      <div style="display:flex;gap:8px">
+        <button class="checkout" onclick="checkout()">Checkout</button>
+        <button class="close-cart" onclick="toggleCart()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Product data (name, price in ₹, image url, category)
+    const products = [
+      // Kids
+      {id:'k1',cat:'kids',name:'Baby Gentle Shampoo',price:249,img:'https://bumtum.in/cdn/shop/files/2copy_600x.png?v=1750881361'},
+      {id:'k2',cat:'kids',name:'Tear-free Bath Wash',price:199,img:'https://mothersparsh.com/cdn/shop/files/3-Tearfreekidswash.webp?v=1726054590&width=1946'},
+
+      // Teens
+      {id:'t1',cat:'teens',name:'Oil-control Face Wash',price:349,img:'https://m.media-amazon.com/images/I/510VMKAOD8L._UF1000,1000_QL80_.jpg'},
+      {id:'t2',cat:'teens',name:'Spot Treatment Gel',price:299,img:'https://images.thedermaco.com/catalog/product/2/_/2__salicylic_acid_spot_treatment_gel.jpg?auto=format&fit=contain&width=720&auto=compress?format=auto'},
+
+      // Adults
+      {id:'a1',cat:'adults',name:'Vitamin C Serum',price:899,img:'https://plumgoodness.com/cdn/shop/files/001_9013bf85-0761-4afd-80a3-878cf4665ce5.jpg?v=1735905481'},
+      {id:'a2',cat:'adults',name:'Daily Moisturizer SPF30',price:649,img:'https://m.media-amazon.com/images/I/716m6dTygaL._UF1000,1000_QL80_.jpg'},
+      {id:'a3',cat:'adults',name:'Nourishing Hair Oil',price:499,img:'https://www.soulflower.in/cdn/shop/files/Castor_4.webp?v=1743762786'},
+
+      // Seniors
+      {id:'s1',cat:'seniors',name:'Deep Hydration Cream',price:999,img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGdGbfhP3uvbdtAZmOVulUeH6yfNeEu5AQXXee9MWfv7iYYl2JwXGRy32iayq3-jIeeRs&usqp=CAU'},
+      {id:'s2',cat:'seniors',name:'Gentle Body Lotion',price:549,img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlzo4H-VCMt4P3najAW-z_ZXehJemz9J0S5NQ1GbmVg5TVDsGlxM_AkWHUfpXzQzHEDS0&usqp=CAU'}
+    ];
+
+    // cart structure: [{id,name,price,img,qty}]
+    let cart = [];
+
+    // render product grids
+    function renderProducts(){
+      const kids = document.getElementById('kids-grid');
+      const teens = document.getElementById('teens-grid');
+      const adults = document.getElementById('adults-grid');
+      const seniors = document.getElementById('seniors-grid');
+      kids.innerHTML = teens.innerHTML = adults.innerHTML = seniors.innerHTML = '';
+
+      products.forEach(p=>{
+        const el = document.createElement('div');
+        el.className = 'card';
+        el.innerHTML = `
+          <img class="thumb" src="${p.img}" alt="${escapeHtml(p.name)}">
+          <div class="meta">
+            <div class="title">${escapeHtml(p.name)}</div>
+            <div class="price">₹${p.price.toLocaleString()}</div>
+            <div style="margin-top:auto"><button class="add" onclick="addToCart('${p.id}')">Add to Cart</button></div>
+          </div>
+        `;
+        if(p.cat==='kids') kids.appendChild(el);
+        if(p.cat==='teens') teens.appendChild(el);
+        if(p.cat==='adults') adults.appendChild(el);
+        if(p.cat==='seniors') seniors.appendChild(el);
+      });
+    }
+
+    // safe text escape
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, (m)=> ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]) }
+
+    // add to cart by product id
+    function addToCart(id){
+      const p = products.find(x=>x.id===id);
+      if(!p) return;
+      const existing = cart.find(it=>it.id===id);
+      if(existing) existing.qty += 1;
+      else cart.push({ id:p.id, name:p.name, price:p.price, img:p.img, qty:1 });
+      updateCartUI();
+      // small visual feedback
+      const btn = event?.target;
+      if(btn){
+        btn.textContent = 'Added';
+        setTimeout(()=> btn.textContent = 'Add to Cart',700);
+      }
+    }
+
+    // toggle popup
+    function toggleCart(){
+      const popup = document.getElementById('cart-popup');
+      popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+      renderCart();
+    }
+
+    // render cart list
+    function renderCart(){
+      const container = document.getElementById('cart-items');
+      container.innerHTML = '';
+      if(cart.length === 0){
+        container.innerHTML = '<p style="color:#64748b">Your cart is empty. Add products you like.</p>';
+        document.getElementById('cart-total').textContent = '₹0';
+        updateCartCount();
+        return;
+      }
+      let total = 0;
+      cart.forEach((item, idx)=>{
+        total += item.price * item.qty;
+        const row = document.createElement('div');
+        row.className = 'cart-row';
+        row.innerHTML = `
+          <img src="${item.img}" alt="${escapeHtml(item.name)}">
+          <div class="cart-info">
+            <div class="cart-name">${escapeHtml(item.name)}</div>
+            <div class="cart-price">₹${(item.price*item.qty).toLocaleString()} <small style="color:#64748b;font-weight:600">(${item.qty} × ₹${item.price})</small></div>
+            <div class="qty">
+              <button aria-label="decrease" onclick="changeQty(${idx}, -1)">−</button>
+              <span>${item.qty}</span>
+              <button aria-label="increase" onclick="changeQty(${idx}, 1)">+</button>
+              <button style="margin-left:8px;background:none;border:none;color:#ef4444;cursor:pointer;font-weight:700" onclick="removeFromCart(${idx})">Remove</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+      document.getElementById('cart-total').textContent = `₹${total.toLocaleString()}`;
+      updateCartCount();
+    }
+
+    function updateCartUI(){
+      renderCart();
+      // show small animation on cart count
+      const countEl = document.getElementById('cart-count');
+      countEl.textContent = cart.reduce((s,it)=>s+it.qty,0);
+      countEl.animate([{transform:'scale(1)'},{transform:'scale(1.12)'},{transform:'scale(1)'}],{duration:250});
+    }
+
+    function updateCartCount(){
+      const countEl = document.getElementById('cart-count');
+      countEl.textContent = cart.reduce((s,it)=>s+it.qty,0);
+    }
+
+    function changeQty(index, delta){
+      if(!cart[index]) return;
+      cart[index].qty += delta;
+      if(cart[index].qty <= 0) cart.splice(index,1);
+      updateCartUI();
+    }
+
+    function removeFromCart(index){
+      if(!cart[index]) return;
+      cart.splice(index,1);
+      updateCartUI();
+    }
+
+    function checkout(){
+      if(cart.length===0){ alert('Your cart is empty.'); return; }
+      // simple demo checkout flow
+      let summary = 'Order summary:\\n';
+      cart.forEach(it=> summary += `${it.name} x${it.qty} — ₹${(it.price*it.qty).toLocaleString()}\\n`);
+      summary += `\\nTotal: ${document.getElementById('cart-total').textContent}`;
+      alert(summary + '\\n\\n(Checkout demo — no real payment)');
+      // clear cart
+      cart = [];
+      updateCartUI();
+      toggleCart();
+    }
+
+    // initialize
+    renderProducts();
+    updateCartCount();
+  </script>
+</body>
+</html>

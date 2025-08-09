@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Luxelife — Electronics Store</title>
+  <style>
+    /* Reset */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; color: #111827; }
+
+    /* Layout */
+    header { background: linear-gradient(90deg,#0f172a,#0b1220); color: #fff; padding: 18px 28px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 28px; }
+
+    /* Nav */
+    .nav { display:flex; align-items:center; gap:18px; justify-content:space-between; }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:700; font-size:1.1rem; }
+    .brand .logo { width:44px; height:44px; background:#fff; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#0b1220; font-weight:800; }
+    nav ul { display:flex; gap:14px; list-style:none; }
+    nav a { color:rgba(255,255,255,0.9); text-decoration:none; padding:8px 10px; border-radius:8px; font-weight:600; }
+    nav a:hover { background: rgba(255,255,255,0.06); }
+
+    /* Hero */
+    .hero { display:grid; grid-template-columns: 1fr 420px; gap:24px; align-items:center; margin-top:28px; }
+    .cta { display:inline-block; padding:12px 18px; background:#06b6d4; color:#072027; font-weight:700; border-radius:10px; text-decoration:none; }
+    .hero-card { background: linear-gradient(180deg,#0b1220 0%, #08101a 100%); padding:18px; border-radius:12px; color:#e6eef8; box-shadow: 0 8px 30px rgba(2,6,23,0.6); }
+    .hero-card img { width:100%; height:240px; object-fit:cover; border-radius:8px; display:block; }
+
+    /* Filters */
+    .filters { display:flex; gap:12px; margin: 24px 0; flex-wrap:wrap; }
+    .chip { padding:8px 12px; background:#f1f5f9; border-radius:999px; cursor:pointer; font-weight:600; }
+
+    /* Product grid */
+    .grid { display:grid; grid-template-columns: repeat(3,1fr); gap:18px; }
+    .card { background:#ffffff; border-radius:12px; padding:14px; box-shadow:0 6px 20px rgba(10,20,30,0.06); transition: transform .18s ease, box-shadow .18s ease; }
+    .card:hover { transform: translateY(-6px); box-shadow:0 12px 40px rgba(10,20,30,0.12); }
+    .card img { width:100%; height:160px; object-fit:contain; background:linear-gradient(180deg,#f8fafc,#fff); border-radius:8px; }
+    .card h3 { margin-top:12px; font-size:1.02rem; }
+    .price { font-weight:800; margin-top:6px; }
+    .meta { display:flex; justify-content:space-between; align-items:center; margin-top:12px; }
+    .btn { padding:8px 12px; border-radius:8px; text-decoration:none; font-weight:700; }
+    .btn-primary { background:#0ea5a4; color:#042022; }
+    .btn-outline { border:1px solid #e6eef8; color:#0b1220; background:transparent; }
+
+    /* Footer */
+    footer { margin-top:40px; padding:24px 0; border-top:1px solid #e6eef8; text-align:center; color:#374151; }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 640px) {
+      header { padding: 14px; }
+      .container { padding:16px; }
+      nav ul { display:none; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">E</div>
+        <div>
+          <div>Luxelife</div>
+          <small style="opacity:.85; font-weight:600;">Smart gadgets — Fair prices</small>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <a class="cta" href="#products">Shop Now</a>
+
+        <section id="products">
+          <div class="grid">
+            <!-- Card 1 -->
+            <article class="card">
+              <img src="https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2018/04/Asus-Zenfone-Max-Pro-M1-review-in-picture.jpg?ssl=1&quality=80&w=728&h=546" alt="Smartphone">
+              <h3>ZenPhone X Pro</h3>
+              <div class="price">₹29,999</div>
+              <div class="meta">
+                <span>6.7" OLED • 128GB</span>
+                <a class="btn btn-primary" href="#">Add</a>
+              </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="card">
+              <img src="https://images.meesho.com/images/products/175311878/ktulz_512.webp" alt="Earbuds">
+              <h3>AirTune Pro</h3>
+              <div class="price">₹6,499</div>
+              <div class="meta">
+                <span>ANC • 30h battery</span>
+                <a class="btn btn-primary" href="#">Add</a>
+              </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="card">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR8el5JtD2C26w8n8Q3FgP057xvlqPzB0d_w&s" alt="Smart Speaker">
+              <h3>HomePulse Mini</h3>
+              <div class="price">₹4,199</div>
+              <div class="meta">
+                <span>Voice assistant • Multiroom</span>
+                <a class="btn btn-primary" href="#">Add</a>
+              </div>
+            </article>
+
+            <!-- Card 4 -->
+            <article class="card">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-pDLGqhfEHnQ9C-KbZLD-OOuLBKG7rgzkFw&s" alt="Gaming Headset">
+              <h3>Raptor G1</h3>
+              <div class="price">₹3,299</div>
+              <div class="meta">
+                <span>Surround • Mic</span>
+                <a class="btn btn-primary" href="#">Add</a>
+              </div>
+            </article>
+
+            <!-- Card 5 -->
+            <article class="card">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb0zEWT9foALgPbfT-KRWAorNiJ5XGXmbUcg&s" alt="Power Bank">
+              <h3>VoltMax 20,000mAh</h3>
+              <div class="price">₹2,199</div>
+              <div class="meta">
+                <span>PD Fast Charge</span>
+                <a class="btn btn-primary" href="#">Add</a>
+              </div>
+            </article>
+
+            <!-- Card 6 -->
+            <article class="card">
+              <img src="https://content3.jdmagicbox.com/v2/comp/rajnandgaon/y8/9999p7744.7744.210723122525.f9y8/catalogue/tickfit-gym-anupam-nagar-rajnandgaon-gyms-ap7q6kykzj.jpg" alt="Smart Watch">
+              <h3>TickFit S</h3>
+              <div class="price">₹7,499</div>
+              <div class="meta">
+                <span>Health • Sleep</span>
+                <a class="btn btn-primary" href="#">Add</a>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <aside class="hero-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqFor1KeBHB96sGD-uywiJFDD_fhnT79FH8w&s" alt="Featured deal">
+        <h3 style="margin-top:12px;">Weekend Deal — Up to 40% Off Accessories</h3>
+        <div style="margin-top:12px; display:flex; gap:8px;">
+          <a class="btn btn-primary" href="#deals">View Deals</a>
+          <a class="btn btn-outline" href="#contact">Contact Us</a>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>© 2025 ElectroHub. Built with ❤️.</small>
+    </div>
+  </footer>
+</body>
+</html>
