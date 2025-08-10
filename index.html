@@ -12,26 +12,22 @@
             box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
-
         body {
-            background-color: #f3f3f3;
+            background-color: #e8e8e8;
         }
-
         /* Navbar */
         .navbar {
             height: 60px;
-            background-color: #2874f0;
+            background-color: #f028e3;
             color: white;
             display: flex;
             align-items: center;
             justify-content: space-evenly;
         }
-
         .nav-logo {
             height: 50px;
             width: 100px;
         }
-
         .logo {
             background-image: url("https://www.logodesign.net/logo/smiling-bag-under-shopping-cart-5185ld.png");
             background-size: contain;
@@ -39,14 +35,12 @@
             height: 50px;
             width: 100%;
         }
-
         .nav-search {
             display: flex;
             justify-content: space-evenly;
             width: 50%;
             height: 40px;
         }
-
         .nav-search input {
             width: 100%;
             padding: 10px;
@@ -54,28 +48,57 @@
             outline: none;
             border-radius: 2px 0 0 2px;
         }
-
         .nav-search button {
             width: 45px;
             border: none;
             background-color: #fff;
-            color: #2874f0;
+            color: #f028e3;
             border-radius: 0 2px 2px 0;
             cursor: pointer;
         }
-
         .nav-items {
             display: flex;
             justify-content: space-evenly;
             width: 20%;
+            position: relative; /* Added for dropdown positioning */
         }
-
         .nav-item {
             color: white;
             text-decoration: none;
             font-weight: 500;
+            display: flex;
+            align-items: center;
         }
-
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+            top: 100%;
+            right: 0;
+        }
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-weight: normal;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+            color: #f028e3;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
         /* Panel */
         .panel {
             height: 40px;
@@ -85,52 +108,44 @@
             align-items: center;
             justify-content: space-evenly;
         }
-
         .panel-all {
             display: flex;
             align-items: center;
             padding: 0 10px;
             cursor: pointer;
         }
-
         .panel-all span {
             margin-left: 5px;
             font-weight: 700;
         }
-
         .panel-options {
             width: 80%;
             display: flex;
             justify-content: space-evenly;
         }
-
         .panel-options a {
             text-decoration: none;
             color: #2874f0;
             font-weight: 500;
         }
-
         /* Hero Section */
         .hero-section {
             position: relative;
             margin: 10px auto;
             max-width: 1500px;
-            height: 300px;
+            height: 550px; 
             overflow: hidden;
         }
-
         .hero-slide {
             display: none;
             width: 100%;
             height: 100%;
         }
-
         .hero-slide img {
-            width: 100%;
+            width: 90%;
             height: 100%;
             object-fit: cover;
         }
-
         .prev, .next {
             cursor: pointer;
             position: absolute;
@@ -146,59 +161,64 @@
             user-select: none;
             background-color: rgba(0,0,0,0.5);
         }
-
         .next {
             right: 0;
             border-radius: 3px 0 0 3px;
         }
-
         .prev:hover, .next:hover {
             background-color: rgba(0,0,0,0.8);
         }
-
         .dots {
             text-align: center;
             position: absolute;
             bottom: 10px;
             width: 100%;
         }
-
         .dot {
             cursor: pointer;
-            height: 15px;
-            width: 15px;
+            height: 10px;
+            width: 10px;
             margin: 0 2px;
             background-color: #bbb;
             border-radius: 50%;
             display: inline-block;
             transition: background-color 0.6s ease;
         }
-
         .active, .dot:hover {
             background-color: #717171;
         }
-
         .fade {
             animation-name: fade;
             animation-duration: 1.5s;
         }
-
         @keyframes fade {
             from {opacity: .4}
             to {opacity: 1}
         }
-
+        /* Caption styling */
+        .slide-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 20px;
+            color: #fff;
+            text-align: center;
+        }
         /* Shop Section */
         .shop-section {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-evenly;
             background-color: #fff;
-            padding: 20px 0;
-            margin: 10px auto;
+            padding: 25px 0;
+            margin: 15px auto;
             max-width: 1500px;
+            border-radius: 8px;
         }
-
         .box {
             height: 350px;
             width: 23%;
@@ -208,7 +228,6 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-
         .box-content {
             margin: 0 15px;
             height: 100%;
@@ -216,7 +235,6 @@
             flex-direction: column;
             justify-content: space-between;
         }
-
         .box-img {
             height: 250px;
             width: 100%;
@@ -224,43 +242,37 @@
             background-position: center;
             margin: 10px 0;
         }
-
         .box-content h2 {
             font-size: 21px;
             color: #0F1111;
         }
-
         .box-content a {
             color: #007185;
             text-decoration: none;
             font-size: 13px;
         }
-
         .box-content a:hover {
             color: #C7511F;
             text-decoration: underline;
         }
-
         /* Products Section */
         .products-section {
             background-color: #fff;
-            padding: 20px;
-            margin: 10px auto;
+            padding: 25px;
+            margin: 15px auto;
             max-width: 1500px;
+            border-radius: 8px;
         }
-
         .products-section h2 {
             font-size: 24px;
             margin-bottom: 20px;
             color: #0F1111;
         }
-
         .products-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
         }
-
         .product-card {
             width: 23%;
             min-width: 200px;
@@ -270,19 +282,16 @@
             border-radius: 5px;
             transition: transform 0.3s;
         }
-
         .product-card:hover {
             transform: scale(1.02);
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-
         .product-img {
             width: 100%;
             height: 200px;
             object-fit: contain;
             margin-bottom: 10px;
         }
-
         .product-title {
             font-size: 16px;
             margin-bottom: 5px;
@@ -290,19 +299,16 @@
             height: 40px;
             overflow: hidden;
         }
-
         .product-price {
             font-size: 20px;
             font-weight: bold;
             color: #B12704;
             margin-bottom: 5px;
         }
-
         .product-rating {
             color: #FFA41C;
             margin-bottom: 10px;
         }
-
         .add-to-cart {
             width: 100%;
             padding: 8px;
@@ -312,18 +318,15 @@
             cursor: pointer;
             font-weight: bold;
         }
-
         .add-to-cart:hover {
             background-color: #F7CA00;
         }
-
         /* Footer */
         footer {
             margin-top: 30px;
         }
-
         .footer-panel1 {
-            background-color: #37475A;
+            background-color: #2c3e50;
             color: white;
             height: 50px;
             display: flex;
@@ -332,29 +335,24 @@
             font-size: 13px;
             cursor: pointer;
         }
-
         .footer-panel1:hover {
             background-color: #485769;
         }
-
         .footer-panel2 {
-            background-color: #232F3E;
+            background-color: #1a2530;
             color: white;
             display: flex;
             justify-content: space-evenly;
             padding: 40px 0;
         }
-
         .footer-panel2 ul {
             margin: 0 15px;
         }
-
         .footer-panel2 h3 {
             font-size: 16px;
             font-weight: bold;
             margin-bottom: 10px;
         }
-
         .footer-panel2 a {
             display: block;
             font-size: 14px;
@@ -362,20 +360,17 @@
             text-decoration: none;
             margin: 10px 0;
         }
-
         .footer-panel2 a:hover {
             text-decoration: underline;
         }
-
         .footer-panel3 {
-            background-color: #232F3E;
+            background-color: #1a2530;
             border-top: 1px solid #3a4553;
             height: 70px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
         .footer-panel3 .logo {
             background-image: url("https://www.logodesign.net/logo/smiling-bag-under-shopping-cart-5185ld.png");
             background-size: contain;
@@ -383,26 +378,22 @@
             height: 50px;
             width: 100px;
         }
-
         .footer-panel4 {
             background-color: #131A22;
             color: #DDD;
-            height: 80px;
+            height: 500px;
             font-size: 12px;
             text-align: center;
             padding: 20px 0;
         }
-
         .footer-panel4 .pages {
             margin-bottom: 10px;
         }
-
         .footer-panel4 a {
             color: #DDD;
             text-decoration: none;
             margin: 0 10px;
         }
-
         .footer-panel4 a:hover {
             text-decoration: underline;
         }
@@ -422,9 +413,20 @@
             </div>
             
             <div class="nav-items">
-                <a href="login.html" class="nav-item">Login</a>
-                <a href="#" class="nav-item">More <i class="fas fa-chevron-down"></i></a>
-                <a href="addtocart.html" class="nav-item"><i class="fas fa-shopping-cart"></i> Cart</a>
+                <a href="file:///C:/Users/AKHILA/Desktop/Ecommerce/login.html" class="nav-item">Login</a>
+                
+                <!-- Dropdown Menu for More Options -->
+                <div class="dropdown">
+                    <a href="#" class="nav-item">More <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#">Electronics</a>
+                        <a href="#">Home & Kitchen</a>
+                        <a href="#">Beauty & Personal Care</a>
+                        <a href="#">Clothes</a>
+                    </div>
+                </div>
+                
+                <a href="file:///C:/Users/AKHILA/Desktop/Ecommerce/addtocart.html" class="nav-item"><i class="fas fa-shopping-cart"></i> Cart</a>
             </div>
         </div>
         
@@ -434,63 +436,81 @@
                 <span>All categories </span>
             </div>
             
+            <div class="panel-options">
+                <a href="#">Electronics</a>
+                <a href="#">Home & Kitchen</a>
+                <a href="#">Beauty & Personal Care</a>
+                <a href="#">Clothes</a>
+            </div>
         </div>
     </header>
-
     <!-- Hero Section -->
     <div class="hero-section">
         <div class="hero-slide fade">
-            <img src="https://images-eu.ssl-images-amazon.com/images/G/31/img23/Fashion/Event/Gateway/WRS/May/PC_Hero_3000x1200._CB591334952_.jpg" alt="Deal of the Day">
+            <img src="https://www.cardexpert.in/wp-content/uploads/2022/08/Weekly-offers.gif" alt="Deal of the Day">
         </div>
         <div class="hero-slide fade">
-            <img src="https://images-eu.ssl-images-amazon.com/images/G/31/img21/Wireless/Shreyansh/BAU/Unrec/xcm_banners_04_2x_v3._CB591063027_.jpg" alt="Summer Sale">
+            <img src="https://www.shutterstock.com/image-vector/summer-sale-three-blue-podium-260nw-2471730467.jpg" alt="Summer Sale">
         </div>
         <div class="hero-slide fade">
-            <img src="https://images-eu.ssl-images-amazon.com/images/G/31/img22/Electronics/Clearance/Clearance_store_Desktop_CC_2x._CB608315487_.jpg" alt="New Arrivals">
+            <img src="https://img.freepik.com/free-vector/modern-new-arrival-shopping-background-design_1017-36555.jpg" alt="New Arrivals">
+        </div>
+        <div class="hero-slide fade">
+            <img src="https://cdn.create.vista.com/downloads/8f86a1fc-4f6a-4201-a2c7-d7e04742544b_640.jpeg" alt="Beachwear Deals">
+        </div>
+        <div class="hero-slide fade">
+            <img src="https://www.extreme-eyewear.co.uk/wp-content/uploads/2025/01/Prescription-sun.png" alt="Sunglasses Offer">
+        </div>
+        <div class="hero-slide fade">
+            <img src="https://www.shutterstock.com/image-vector/amazing-combo-offer-logo-unit-600nw-2486680169.jpg" alt="Summer Electronics">
         </div>
         
+        <!-- Navigation arrows -->
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
         
+        <!-- Dots -->
         <div class="dots">
             <span class="dot" onclick="currentSlide(1)"></span>
             <span class="dot" onclick="currentSlide(2)"></span>
             <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+            <span class="dot" onclick="currentSlide(6)"></span>
         </div>
     </div>
-
+        
     <!-- Shop Sections -->
     <div class="shop-section">
         <div class="box">
             <div class="box-content">
                 <h2>Clothes</h2>
                 <div class="box-img" style="background-image: url('https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></div>
-                <a href="clothes.html">Vist</a>
+                <a href="file:///C:/Users/AKHILA/Desktop/Ecommerce/clothes.html">Visit</a>
             </div>
         </div>
         <div class="box">
             <div class="box-content">
                 <h2>Electronics</h2>
                 <div class="box-img" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></div>
-                <a href="electronics.html">See more</a>
+                <a href="file:///C:/Users/AKHILA/Desktop/Ecommerce/electronics.html#contact">See more</a>
             </div>
         </div>
         <div class="box">
             <div class="box-content">
                 <h2>Home & Kitchen</h2>
                 <div class="box-img" style="background-image: url('https://images.unsplash.com/photo-1556911220-bff31c812dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></div>
-                <a href="home&elctronics.html">See more</a>
+                <a href="file:///C:/Users/AKHILA/Desktop/Ecommerce/home&elctronics.html">See more</a>
             </div>
         </div>
         <div class="box">
             <div class="box-content">
                 <h2>Beauty & Personal Care</h2>
                 <div class="box-img" style="background-image: url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></div>
-                <a href="">See more</a>
+                <a href="file:///C:/Users/AKHILA/Desktop/Ecommerce/Beauty%20&%20Personal%20Care.html">See more</a>
             </div>
         </div>
     </div>
-
     <!-- Products Section -->
     <div class="products-section">
         <h2>Today's Deals</h2>
@@ -498,7 +518,6 @@
             <!-- Product cards will be added dynamically with JavaScript -->
         </div>
     </div>
-
     <!-- Footer -->
     <footer>
         <div class="footer-panel1">
@@ -540,7 +559,7 @@
         </div>
         
         <div class="footer-panel3">
-            <div class="Luxelife"></div>
+            <div class="logo"></div>
         </div>
         
         <div class="footer-panel4">
@@ -554,20 +573,16 @@
             </div>
         </div>
     </footer>
-
     <script>
         // Image Slider
         let slideIndex = 1;
         showSlides(slideIndex);
-
         function plusSlides(n) {
             showSlides(slideIndex += n);
         }
-
         function currentSlide(n) {
             showSlides(slideIndex = n);
         }
-
         function showSlides(n) {
             let i;
             let slides = document.getElementsByClassName("hero-slide");
@@ -587,12 +602,10 @@
             slides[slideIndex-1].style.display = "block";
             dots[slideIndex-1].className += " active";
         }
-
         // Auto slide change every 5 seconds
         setInterval(function() {
             plusSlides(1);
         }, 5000);
-
         // Product data
         const products = [
             {
@@ -641,10 +654,33 @@
                 title: "Power Bank 20000mAh",
                 price: "₹1,099",
                 rating: "★★★★☆",
-                image: "https://images.unsplash.com/photo-1588943211346-0908a1fb0b01?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-            }
+                image: "https://i.ytimg.com/vi/y4geLj_Yz28/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDb4EakjinJL32owGkt4dVOQlF0uQ"
+            },
+            {
+                title: "Wooden Glass Nature Color Painting",
+                price: "₹890",
+                rating: "★★★★☆",
+                image: "https://5.imimg.com/data5/SELLER/Default/2020/12/GF/LJ/UO/36742241/portraits-color-painting-services.jpg"
+            },
+            {
+                title: "Wooden Wall Hanging for Home Decor",
+                price: "₹290",
+                rating: "★★★★☆",
+                image: "https://www.decormantra.in/cdn/shop/files/61PfWnSpNkL._SX522.jpg?v=1725627608"
+            },
+            {
+                title: "Balcony Decor item",
+                price: "₹270",
+                rating: "★★★★☆",
+                image: "https://m.media-amazon.com/images/I/81OZfWpAdfL._UF894,1000_QL80_.jpg"
+            },
+            {
+                title: "Bedroom Wall Decor item",
+                price: "₹2700",
+                rating: "★★★★☆",
+                image: "https://newsmeter.in/h-upload/2021/12/08/310321-wall-mirror-dcor.webp"
+            },
         ];
-
         // Display products
         const productsContainer = document.querySelector('.products-container');
         
@@ -665,4 +701,3 @@
     </script>
 </body>
 </html>
-
