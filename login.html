@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuxeLife Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* 🌸 Decorative flowers */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://t3.ftcdn.net/jpg/06/16/34/92/360_F_616349295_hw3oZYyNeRrz2s1h2n6x5fBLwHUA4Gpw.jpg'),
+                        url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Bachelor%27s_button%2C_Basket_flower%2C_Boutonniere_flower%2C_Cornflower_-_3.jpg/1200px-Bachelor%27s_button%2C_Basket_flower%2C_Boutonniere_flower%2C_Cornflower_-_3.jpg'),
+                        url('https://housing.com/news/wp-content/uploads/2023/12/How-to-grow-and-care-for-Cape-Marguerite-f.jpg'),
+                        url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7RkHFNigwswp4aB-xXya4Y4xVI6rd_shxyw&s');
+      background-repeat: no-repeat;
+      background-size: 150px, 180px, 120px;
+      background-position: top left, bottom right, top right, bottom left;
+      opacity: 0.4;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      padding: 40px;
+      width: 350px;
+      text-align: center;
+      backdrop-filter: blur(15px);
+      z-index: 1;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #fff;
+      font-size: 2rem;
+      letter-spacing: 2px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #ddd;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    input:focus {
+      border: 2px solid #e94560;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #e94560;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #ff2e63;
+    }
+
+    .links {
+      margin-top: 15px;
+    }
+
+    .links a {
+      color: #fff;
+      font-size: 14px;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .links a:hover {
+      color: #e94560;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Login Form -->
+    <form id="loginForm">
+      <h1>LUXE Login</h1>
+      <div class="input-group">
+        <label for="loginEmail">Email or Phone</label>
+        <input type="text" id="loginEmail" placeholder="Enter email or phone" required>
+      </div>
+      <div class="input-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter password" required>
+      </div>
+      <button type="submit" class="btn">Login</button>
+      <div class="links">
+        <a id="showForgot">Forgot Password?</a>
+        <a id="showSignup">Sign Up</a>
+      </div>
+    </form>
+
+    <!-- Sign Up Form -->
+    <form id="signupForm" class="hidden">
+      <h1>LUXE Sign Up</h1>
+      <div class="input-group">
+        <label for="signupEmail">Email or Phone</label>
+        <input type="text" id="signupEmail" placeholder="Enter email or phone" required>
+      </div>
+      <div class="input-group">
+        <label for="signupPassword">Password</label>
+        <input type="password" id="signupPassword" placeholder="Enter password" required>
+      </div>
+      <button type="submit" class="btn">Sign Up</button>
+      <div class="links">
+        <a id="showLoginFromSignup">Already have an account? Sign In</a>
+      </div>
+    </form>
+
+    <!-- Forgot Password Form -->
+    <form id="forgotForm" class="hidden">
+      <h1>Forgot Password</h1>
+      <div class="input-group">
+        <label for="forgotEmail">Enter your Email or Phone</label>
+        <input type="text" id="forgotEmail" placeholder="Enter email or phone" required>
+      </div>
+      <div class="input-group">
+        <label for="newPassword">New Password</label>
+        <input type="password" id="newPassword" placeholder="Enter new password" required>
+      </div>
+      <button type="submit" class="btn">Reset Password</button>
+      <div class="links">
+        <a id="showLoginFromForgot">Back to Login</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById("loginForm");
+    const signupForm = document.getElementById("signupForm");
+    const forgotForm = document.getElementById("forgotForm");
+
+    const showSignup = document.getElementById("showSignup");
+    const showForgot = document.getElementById("showForgot");
+    const showLoginFromSignup = document.getElementById("showLoginFromSignup");
+    const showLoginFromForgot = document.getElementById("showLoginFromForgot");
+
+    // Switch forms
+    showSignup.addEventListener("click", () => {
+      loginForm.classList.add("hidden");
+      signupForm.classList.remove("hidden");
+    });
+
+    showForgot.addEventListener("click", () => {
+      loginForm.classList.add("hidden");
+      forgotForm.classList.remove("hidden");
+    });
+
+    showLoginFromSignup.addEventListener("click", () => {
+      signupForm.classList.add("hidden");
+      loginForm.classList.remove("hidden");
+    });
+
+    showLoginFromForgot.addEventListener("click", () => {
+      forgotForm.classList.add("hidden");
+      loginForm.classList.remove("hidden");
+    });
+
+    // Sign Up
+    signupForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("signupEmail").value.trim();
+      const password = document.getElementById("signupPassword").value.trim();
+
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters");
+        return;
+      }
+
+      const user = { email, password };
+      localStorage.setItem("luxeUser", JSON.stringify(user));
+      alert("Account created successfully! Please log in.");
+      signupForm.classList.add("hidden");
+      loginForm.classList.remove("hidden");
+    });
+
+    // Login
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value.trim();
+      const storedUser = JSON.parse(localStorage.getItem("luxeUser"));
+
+      if (storedUser && storedUser.email === email && storedUser.password === password) {
+        alert("Login successful!");
+      } else {
+        alert("Invalid email/phone or password.");
+      }
+    });
+
+    // Forgot Password
+    forgotForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("forgotEmail").value.trim();
+      const newPassword = document.getElementById("newPassword").value.trim();
+      const storedUser = JSON.parse(localStorage.getItem("luxeUser"));
+
+      if (storedUser && storedUser.email === email) {
+        storedUser.password = newPassword;
+        localStorage.setItem("luxeUser", JSON.stringify(storedUser));
+        alert("Password reset successfully! Please log in.");
+        forgotForm.classList.add("hidden");
+        loginForm.classList.remove("hidden");
+      } else {
+        alert("User not found.");
+      }
+    });
+  </script>
+</body>
+</html>

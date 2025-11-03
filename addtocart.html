@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LuxeLife Cart</title>
+<style>
+  body{font-family:Arial,sans-serif;background:#f4f4f4;margin:0;padding:0;}
+  header{background:#5d4037;color:#fff;padding:15px;text-align:center;}
+  .container{max-width:900px;margin:20px auto;background:#fff;padding:20px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+  h2{text-align:center;margin-bottom:20px;}
+  .cart-item{display:flex;align-items:center;gap:15px;padding:12px 0;border-bottom:1px solid #ddd;}
+  .cart-item img{width:80px;height:80px;object-fit:cover;border-radius:8px;}
+  .cart-details{flex:1;}
+  .cart-details h4{margin:0 0 6px 0;}
+  .cart-details p{margin:2px 0;}
+  .qty{display:flex;align-items:center;gap:6px;margin-top:6px;}
+  .qty button{width:28px;height:28px;border:1px solid #ccc;background:#fff;border-radius:6px;cursor:pointer;}
+  .remove-btn{background:none;border:none;color:#ef4444;cursor:pointer;font-weight:700;margin-left:10px;}
+  .total{display:flex;justify-content:space-between;font-weight:800;font-size:1.2rem;margin-top:20px;}
+  .checkout{margin-top:20px;width:100%;padding:12px;background:#6d4c41;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:800;font-size:1rem;}
+  .empty{text-align:center;color:#64748b;font-size:1.1rem;margin-top:20px;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>LuxeLife Cart</h1>
+</header>
+
+<div class="container">
+  <h2>Your Cart</h2>
+  <div id="cart-items"></div>
+  <div class="total">
+    <span>Total:</span>
+    <span id="cart-total">₹0</span>
+  </div>
+  <button class="checkout" onclick="checkout()">Checkout</button>
+</div>
+
+<script>
+// Sample products (you can add all categories here)
+const products = [
+  {id:'b1', cat:'beauty', name:'Baby Gentle Shampoo', price:899, img:'https://bumtum.in/cdn/shop/files/2copy_600x.png?v=1750881361'},
+  {id:'e1', cat:'electronics', name:'Power Bank', price:1499, img:'https://images-cdn.ubuy.co.in/6620d18656f9903d91488b9c-iniu-power-bank-20000mah-65w-usb-c.jpg'},
+  {id:'h1', cat:'home', name:'Sofa Set', price:22999, img:'https://indiannest.in/cdn/shop/files/hjk.jpg?v=1690754937&width=1445'}
+];
+
+// Single cart for all categories
+let cart = JSON.parse(localStorage.getItem("luxeCart")) || [];
+
+// Function to add item to cart (call this from your product buttons)
+function addToCart(productId){
+  const p = products.find(x=>x.id===productId);
+  if(!p) return;
+  const existing = cart.find(x=>x.id===productId);
+  if(existing) existing.qty += 1;
+  else cart.push({...p, qty:1});
+  saveCart();
+  renderCart();
+}
+
+// Render cart items
+function renderCart(){
+  const container = document.getElementById('cart-items');
+  container.innerHTML='';
+  if(cart.length===0){
+    container.innerHTML='<p class="empty">Your cart is empty.</p>';
+    document.getElementById('cart-total').textContent='₹0';
+    return;
+  }
+  let total=0;
+  cart.forEach((item,idx)=>{
+    total+=item.price*item.qty;
+    const div=document.createElement('div');
+    div.className='cart-item';
+    div.innerHTML=`
+      <img src="${item.img}" alt="${item.name}">
+      <div class="cart-details">
+        <h4>${item.name}</h4>
+        <p>₹${item.price.toLocaleString()}</p>
+        <div class="qty">
+          <button onclick="changeQty(${idx},-1)">−</button>
+          <span>${item.qty}</span>
+          <button onclick="changeQty(${idx},1)">+</button>
+          <button class="remove-btn" onclick="removeItem(${idx})">Remove</button>
+        </div>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+  document.getElementById('cart-total').textContent=`₹${total.toLocaleString()}`;
+}
+
+// Quantity change
+function changeQty(idx,delta){
+  cart[idx].qty+=delta;
+  if(cart[idx].qty<=0) cart.splice(idx,1);
+  saveCart();
+  renderCart();
+}
+
+// Remove item
+function removeItem(idx){
+  cart.splice(idx,1);
+  saveCart();
+  renderCart();
+}
+
+// Save to localStorage
+function saveCart(){
+  localStorage.setItem("luxeCart",JSON.stringify(cart));
+}
+
+// Checkout simulation
+function checkout(){
+  if(cart.length===0){ alert('Cart is empty'); return; }
+  let summary='Order Summary:\n';
+  cart.forEach(it=> summary+=`${it.name} x${it.qty} — ₹${(it.price*it.qty).toLocaleString()}\n`);
+  summary+=`\nTotal: ₹${cart.reduce((a,b)=>a+b.price*b.qty,0).toLocaleString()}`;
+  alert(summary);
+  cart=[];
+  saveCart();
+  renderCart();
+}
+
+// On load
+window.onload=renderCart;
+</script>
+
+</body>
+</html>
