@@ -7,6 +7,8 @@
  *   - Checkout (order generation)
  * Storage: local JSON file via lowdb (db.json)
  */
+const { Low } = require('lowdb');
+const { JSONFile } = require('lowdb/node');
 
 const express = require("express");
 const cors = require("cors");
@@ -280,3 +282,4 @@ app.post("/api/checkout", async (req, res) => {
 // ---------- START SERVER ----------
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`✅ Luxe backend running on http://localhost:${PORT}`));
+
